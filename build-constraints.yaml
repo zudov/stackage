@@ -477,7 +477,8 @@ packages:
         - openpgp-asciiarmor
         - MusicBrainz
         - DAV
-        - hopenpgp-tools
+        # https://github.com/fpco/stackage/issues/463
+        #- hopenpgp-tools
 
     # https://github.com/fpco/stackage/issues/160
     "Ketil Malde":
@@ -507,8 +508,8 @@ packages:
         - code-builder
         - fay-builder
         - generic-aeson
+        - generic-xmlpickler
         - hxt-pickle-utils
-        - imagesize-conduit
         - imagesize-conduit
         - json-schema
         - multipart
@@ -522,8 +523,6 @@ packages:
         - rest-types
         - rest-wai
         - tostring
-        - tostring
-        - uri-encode
         - uri-encode
 
     "Simon Michael <simon@joyful.com>":
@@ -533,7 +532,10 @@ packages:
         - io-manager
 
     "Dimitri Sabadie <dimitri.sabadie@gmail.com":
+        # https://github.com/fpco/stackage/pull/461#issuecomment-76914158
+        # - al
         - monad-journal
+        - smoothie
 
     "Thomas Schilling <nominolo@googlemail.com>":
         - ghc-syb-utils
@@ -578,6 +580,7 @@ packages:
         - haddock-api
         - here
         - hlibgit2
+        - gitlib-libgit2
         - hostname-validate
         - interpolatedstring-perl6
         - iproute
@@ -616,6 +619,9 @@ packages:
        - Spock
        - Spock-digestive
        - Spock-worker
+       - users
+       - users-test
+       - users-postgresql-simple
 
     "Joey Eremondi <joey@eremondi.com>":
         - aeson-pretty
@@ -644,6 +650,11 @@ packages:
 
     "Samplecount stefan@samplecount.com @kaoskorobase":
         - shake-language-c
+
+    "Marcin Mrotek <marcin.jan.mrotek@gmail.com>":
+        - diagrams-hsqml
+        - type-list
+        - vinyl-utils
 
     "Marcin Mrotek <marcin.jan.mrotek@gmail.com>":
         - type-list
@@ -713,18 +724,24 @@ packages:
     "Timothy Jones git@zmthy.io @zmthy":
         - cabal-test-quickcheck
         - http-media
-        
+
     "Greg V greg@unrelenting.technology @myfreeweb":
         - gitson
         - pcre-heavy
+
+    "Francesco Mazzoli f@mazzo.li @bitonic":
+        - language-c-quote
+
+    "Sönke Hahn soenkehahn@gmail.com @soenkehahn":
+        - string-conversions
+
+    "Oleg Grenrus oleg.grenrus@iki.fi @phadej":
+        - waitra
 
     "Stackage upper bounds":
 
         # Force a specific version that's compatible with transformers 0.3
         - transformers-compat == 0.4.0.3
-
-        # https://github.com/fpco/stackage/issues/291
-        - random < 1.0.1.3
 
         # https://github.com/fpco/stackage/issues/390
         # NOTE: When this issue is resolved, remove the expected test failure
@@ -746,9 +763,6 @@ packages:
         # https://github.com/fpco/stackage/issues/426
         - utf8-string < 1
 
-        # https://github.com/d12frosted/CanonicalPath/issues/3
-        - system-canonicalpath < 0.3
-
         # https://github.com/fpco/stackage/issues/440
         - th-orphans < 0.9
         - file-location < 0.4.7
@@ -764,6 +778,10 @@ packages:
         - rest-types < 1.13
         - rest-core < 0.35
         - rest-gen < 0.17
+        - rest-wai < 0.1.0.7
+
+        # https://github.com/fpco/stackage/issues/467
+        - lens < 4.8
 
 # Package flags are applied to individual packages, and override the values of
 # global-flags
@@ -1034,6 +1052,21 @@ expected-test-failures:
 
     # https://github.com/ekmett/semigroupoids/issues/18
     - semigroupoids
+
+    # https://github.com/ndmitchell/hoogle/issues/101
+    - hoogle
+
+    # https://github.com/myfreeweb/gitson/issues/1
+    - gitson
+
+    # https://github.com/jcristovao/enclosed-exceptions/issues/6
+    - enclosed-exceptions
+
+    # Expects a running PostgreSQL server
+    - users-postgresql-simple
+
+    # Problems with linking with system libraries on Ubuntu 12.04
+    - nettle
 
 # Haddocks which are expected to fail. Same concept as expected test failures.
 expected-haddock-failures:
