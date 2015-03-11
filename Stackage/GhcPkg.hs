@@ -25,7 +25,7 @@ getBrokenPackages dir = do
     (_,ps) <- sourceProcessWithConsumer
                   (proc
                        "ghc-pkg"
-                       ["check", "--simple-output", "-f", FP.encodeString dir])
+                       ["check", "--simple-output", "--no-user-package-db", "-f", FP.encodeString dir])
                   (CT.decodeUtf8 $= CT.lines $= CL.consume)
     return (mapMaybe parsePackageIdent (T.words (T.unlines ps)))
 
@@ -35,7 +35,7 @@ getRegisteredPackages dir = do
     (_,ps) <- sourceProcessWithConsumer
                   (proc
                        "ghc-pkg"
-                       ["list", "--simple-output", "-f", FP.encodeString dir])
+                       ["list", "--simple-output", "--no-user-package-db", "-f", FP.encodeString dir])
                   (CT.decodeUtf8 $= CT.lines $= CL.consume)
     return (mapMaybe parsePackageIdent (T.words (T.unlines ps)))
 
@@ -51,5 +51,5 @@ unregisterPackage :: FilePath -> PackageName -> IO ()
 unregisterPackage dir ident = do
     void (readProcessWithExitCode
               "ghc-pkg"
-              ["unregister", "-f", FP.encodeString dir, "--force", display ident]
+              ["unregister", "--no-user-package-db", "-f", FP.encodeString dir, "--force", display ident]
               "")
