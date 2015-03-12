@@ -125,8 +125,7 @@ shakePlan env@Env{..} = do
     tests <- forM normalPackages $
         \(name,plan) ->
              target (targetForTest envShake name (ppVersion plan)) $
-             do need haddockTargets
-                testTarget env name plan
+             testTarget env name plan
     if pbEnableTests envPB
        then want tests
        else want haddockTargets
@@ -478,7 +477,7 @@ testTarget env@Env{..} name plan = do
                        M.lookup exename toolMappings) $
               M.keys $ sdTools $ ppDesc plan
           packagesToTargets =
-              map (\(pname,pver) -> targetForPackage envShake pname pver) .
+              map (\(pname,pver) -> targetForDocs envShake pname pver) .
               mapMaybe (\p -> find ((==p) . fst) versionMappings)
 
 -- | Make sure all package archives have been fetched.
