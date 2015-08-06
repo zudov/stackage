@@ -13,6 +13,8 @@ before_install:
  - export PATH=/opt/ghc/7.10.2/bin:/opt/cabal/1.22/bin:$PATH
 
 install:
+ - ls /opt/ghc
+ - ls /opt/ghc/7.10.2/bin
  - cabal --version
  - echo "$(ghc --version) [$(ghc --print-project-git-commit-id 2> /dev/null || echo '?')]"
  - travis_retry cabal update
