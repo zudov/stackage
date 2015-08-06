@@ -5,12 +5,12 @@ addons:
     sources:
     - hvr-ghc
     packages:
-    - ghc-7.10.1
+    - ghc-7.10.2
     - cabal-install-1.22
 
 # Note: the distinction between `before_install` and `install` is not important.
 before_install:
- - export PATH=/opt/ghc/7.10.1/bin:/opt/cabal/1.22/bin:$PATH
+ - export PATH=/opt/ghc/7.10.2/bin:/opt/cabal/1.22/bin:$PATH
 
 install:
  - cabal --version
